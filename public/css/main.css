@@ -19,18 +19,23 @@ body {
 .homepage__signin {
   background-color: aquamarine;
   box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.1);
-  padding: 24px 24px 32px;
+  padding: 32px 24px;
   border-radius: 4px;
 }
 
 .homepage__title {
-  margin-bottom: 4px;
+  margin-bottom: 8px;
+}
+
+.homepage__text {
+  font-size: 16px;
 }
 
 .homepage__name-input {
   margin: 16px 0;
   display: block;
   padding: 8px;
+  width: 100%;
 }
 
 .homepage__submit-btn {
@@ -42,6 +47,7 @@ body {
   box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2);
   transition: translateY 0.4s linear, background-color 0.5s;
   outline: none;
+  font-size: 16px;
 }
 
 .homepage__submit-btn:hover,
