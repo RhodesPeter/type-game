@@ -13,7 +13,7 @@ nunjucks.configure(path.join(__dirname, 'views'), { autoescape: true, express: a
 app.use(express.static('public'))
 
 app.get('/', function (req, res) {
-  res.render('pages/index.html');
+  res.render('pages/home.html');
 });
 
 app.get('/play', function (req, res) {

@@ -9,6 +9,56 @@ body {
   font: 13px Helvetica, Arial;
 }
 
+.homepage {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.homepage__signin {
+  background-color: aquamarine;
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.1);
+  padding: 24px 24px 32px;
+  border-radius: 4px;
+}
+
+.homepage__title {
+  margin-bottom: 4px;
+}
+
+.homepage__name-input {
+  margin: 16px 0;
+  display: block;
+  padding: 8px;
+}
+
+.homepage__submit-btn {
+  padding: 8px;
+  background-color: white;
+  border-radius: 2px;
+  border-width: 1px;
+  border: 0;
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2);
+  transition: translateY 0.4s linear, background-color 0.5s;
+  outline: none;
+}
+
+.homepage__submit-btn:hover,
+.homepage__submit-btn:focus {
+  background-color: gainsboro;
+}
+
+.homepage__submit-btn:active {
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2);
+  transform: translateY(3px);
+}
+
+/* .main-header {
+  padding: 16px;
+  background-color: aquamarine;
+} */
+
 .chat {
   display: flex;
   flex-wrap: wrap;
