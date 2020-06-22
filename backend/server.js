@@ -8,10 +8,7 @@ const nunjucks = require('nunjucks');
 
 const port = process.env.PORT || 3000;
 
-nunjucks.configure(path.join(__dirname, 'views'), {
-  autoescape: true,
-  express: app
-});
+nunjucks.configure(path.join(__dirname, 'views'), { autoescape: true, express: app });
 
 app.use(express.static('public'))
 
