@@ -1,4 +1,4 @@
-// const users = [];
+const users = [];
 
 const sockets = (io) => {
   io.on('connection', function (socket) {
@@ -15,6 +15,10 @@ const sockets = (io) => {
     socket.on('add username', function (username) {
       socket.nickname = username;
       emitUsersWithUsernames(io);
+    });
+
+    socket.on('start game', function (usernames) {
+      io.emit('direct to play route', usernames);
     });
   });
 }

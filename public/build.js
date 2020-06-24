@@ -33,13 +33,24 @@
     });
   };
 
+  const startGame = (socket) => {
+    document
+      .querySelector('.homepage__start-game-btn')
+      .addEventListener('click', () => socket.emit('start game', 'peter and other names here'));
+
+    socket.on('direct to play route', function (msg) {
+      window.location.href = '/play';
+    });
+  };
+
   const socket = io();
 
   // if (document.querySelector('.chat')) chat();
-  // if (document.querySelector('.play')) connectUser(socket);
+  if (document.querySelector('.play')) ;
   if (document.querySelector('.homepage__signin')) {
     displayAllUsers(socket);
     addUsername(socket);
+    startGame(socket);
   }
 
 }());

@@ -18,6 +18,7 @@ app.get('/', function (req, res) {
   res.render('pages/home.html');
 });
 
+// @TODO if no username cookie redirect to login page?
 app.get('/play', function (req, res) {
   // const usernameFromCookie = req.cookies.username;
   // const ioCookie = req.cookies.io;

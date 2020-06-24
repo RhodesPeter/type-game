@@ -69,6 +69,9 @@ body {
   transition: translateY 0.4s linear, background-color 0.5s;
   outline: none;
   font-size: 16px;
+  display: inline-block;
+  text-decoration: none;
+  color: black;
 }
 
 .btn--outline {
@@ -120,10 +123,7 @@ body {
   list-style: none;
 }
 
-.play__game-controls {
-  height: fit-content;
-  grid-row: 2;
-  grid-column: 1;
+.homepage__start-game {
   margin-top: 16px;
 }
 
