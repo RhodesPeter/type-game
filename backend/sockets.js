@@ -17,21 +17,25 @@ const sockets = (io) => {
       emitUsersWithUsernames(io);
     });
 
-    socket.on('start game', function (usernames) {
-      io.emit('direct to play route', usernames);
+    socket.on('start game', function () {
+      io.emit('direct to play route', getUsernames(io));
     });
   });
 }
 
 const emitUsersWithUsernames = (io) => {
+  io.emit('connected users', getUsernames(io));
+};
+
+const getUsernames = (io) => {
   const allUsers = io.sockets.sockets;
 
   const usernames = Object
     .keys(allUsers)
     .map(key => allUsers[key].nickname)
-    .filter(_=>_);
+    .filter(_ => _);
 
-  io.emit('connected users', usernames);
+  return usernames;
 };
 
 // Passes socket nickname or id if no nickname set.

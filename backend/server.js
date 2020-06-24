@@ -29,9 +29,7 @@ app.get('/play', function (req, res) {
 
   // const allUserNames = getAllUsers().map(user => user.username);
 
-  // res.render('pages/play.html', { players: getAllUsers(io) });
-
-  res.render('pages/play.html');
+  res.render('pages/play.html', { players: Object.values(req.query) });
 });
 
 http.listen(port, function () {
