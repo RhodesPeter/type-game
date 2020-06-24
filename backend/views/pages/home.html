@@ -1,12 +1,30 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <div class="homepage">
-    <form class="homepage__signin" action="/play">
-      <h1 class="homepage__title">Hello!</h1>
-      <p class="homepage__text">Create a username to start</p>
-      <input class="homepage__name-input" type="text" required>
-      <button class="homepage__submit-btn" type="submit">Enter game</button>
-    </form>
-  </div>
+    <div class="homepage">
+      <div class="homepage__flex-wrapper">
+        <h1 class="homepage__game-title">Type Game</h1>
+        <div class="homepage__components-wrapper">
+          <form class="homepage__signin">
+            <h2 class="homepage__signup-title">Hello!</h2>
+            <p class="homepage__text">Create a username to start</p>
+            <input class="homepage__name-input" type="text" required>
+            <button class="homepage__submit-btn" type="submit">Create username</button>
+          </form>
+          <div>
+            <div class="players section">
+              <h1 class="section__title">Players:</h1>
+              <ul class="players__ul">
+                {% for player in players %}
+                  <li class="players__list-item">{{ player }}</li>
+                {% endfor  %}
+              </ul>
+            </div>
+            <div class="play__game-controls">
+              <button class="btn btn--outline" type="button">Start Game</button>
+            </div>
+          <div>
+        </div>
+      </div>
+    </div>
 {% endblock %}

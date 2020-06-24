@@ -1,5 +1,17 @@
 {% extends "base.html" %}
 
 {% block content %}
-  {# {% include "partials/header.html" %} #}
+  <div class="play">
+    <div class="play__players section">
+      <h1 class="section__title">Players:</h1>
+      <ul class="play__players-ul">
+        {% for player in players %}
+          <li class="play__player">{{ player }}</li>
+        {% endfor  %}
+      </ul>
+    </div>
+    <div class="play__game-controls">
+      <button class="btn btn--outline" type="button">Start Game</button>
+    </div>
+  </div>
 {% endblock %}

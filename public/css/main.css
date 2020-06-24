@@ -16,15 +16,35 @@ body {
   align-items: center;
 }
 
+.homepage__flex-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.homepage__components-wrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
 .homepage__signin {
   background-color: aquamarine;
   box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.1);
   padding: 32px 24px;
   border-radius: 4px;
+  margin-right: 24px;
+  margin-bottom: 24px;
+  width: 240px;
 }
 
-.homepage__title {
+.homepage__game-title {
+  margin-bottom: 24px;
+  width: 100%;
+}
+
+.homepage__signup-title {
   margin-bottom: 8px;
+  font-size: 18px;
 }
 
 .homepage__text {
@@ -38,7 +58,8 @@ body {
   width: 100%;
 }
 
-.homepage__submit-btn {
+.homepage__submit-btn,
+.btn {
   padding: 8px;
   background-color: white;
   border-radius: 2px;
@@ -50,20 +71,82 @@ body {
   font-size: 16px;
 }
 
-.homepage__submit-btn:hover,
-.homepage__submit-btn:focus {
-  background-color: gainsboro;
+.btn--outline {
+  border: 2px solid turquoise;
 }
 
-.homepage__submit-btn:active {
+.homepage__submit-btn:hover,
+.homepage__submit-btn:focus,
+.btn:hover,
+.btn:focus {
+  background-color: darkcyan;
+}
+
+.homepage__submit-btn:active,
+.btn:active {
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2);
   transform: translateY(3px);
+}
+
+.section {
+  background-color: aquamarine;
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.1);
+  padding: 32px 24px;
+  border-radius: 4px;
+}
+
+.section__title {
+  font-size: 18px;
+  margin-bottom: 16px;
+}
+
+.play {
+  min-height: 100vh;
+  display: grid;
+  grid-gap: 24px;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+  padding: 24px;
+}
+
+.play__players {
+  height: fit-content;
+  grid-row: 1;
+  grid-column: 1;
+}
+
+.play__player,
+.players__list-item {
+  list-style: none;
+}
+
+.play__game-controls {
+  height: fit-content;
+  grid-row: 2;
+  grid-column: 1;
+  margin-top: 16px;
+}
+
+.play__start-game {
+  padding: 8px;
+  background-color: aquamarine;
+  border-radius: 2px;
+  border-width: 1px;
+  border: 0;
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2);
+  transition: translateY 0.4s linear, background-color 0.5s;
+  outline: none;
+  font-size: 16px;
 }
 
 /* .main-header {
   padding: 16px;
   background-color: aquamarine;
 } */
+
+.players {
+  width: 240px;
+}
 
 .chat {
   display: flex;
@@ -114,13 +197,6 @@ body {
   border: 0;
   padding: 10px;
   width: calc(100% - 80px);
-}
-
-.chat__btn {
-  background: rgb(130, 224, 255);
-  border: none;
-  padding: 10px;
-  width: 80px;
 }
 
 .chat__btn--username {

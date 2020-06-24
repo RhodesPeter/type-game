@@ -1,50 +1,59 @@
-const users = [];
+// const users = [];
 
 const sockets = (io) => {
   io.on('connection', function (socket) {
     console.log('a user connected');
-    io.emit('chat message', { message: '* A new user has joined the chat *' });
-
-    socket.on('chat message', function (msg) {
-      console.log('message: ' + msg);
-
-      // This will emit the event to all connected sockets
-      io.emit('chat message', {
-        message: msg,
-        username: socket.nickname || 'Guest'
-      });
-    });
-
-    emitUpdateUsersEvent(io);
+    // emitUpdateUsersEvent(io); // Might be needed later but not now
+    // emitUsersWithUsernames(io); // ??
+    emitUsersWithUsernames(io);
 
     socket.on('disconnect', function () {
       console.log('a user disconnected');
-      io.emit('chat message', { message: '* A user has left the chat *' });
-
-      emitUpdateUsersEvent(io);
+      emitUsersWithUsernames(io);
     });
 
     socket.on('add username', function (username) {
       socket.nickname = username;
-      emitUpdateUsersEvent(io);
+      emitUsersWithUsernames(io);
     });
   });
 }
 
-// Passes socket nickname or id if no nickname set.
-const emitUpdateUsersEvent = (io) => {
-  // This '/' path is the path of the page with the websockets connection on
-  io.of('/').clients((error, clients) => {
-    if (error) throw error;
+const emitUsersWithUsernames = (io) => {
+  const allUsers = io.sockets.sockets;
 
-    const allUsers = io.sockets.sockets;
+  const usernames = Object
+    .keys(allUsers)
+    .map(key => allUsers[key].nickname)
+    .filter(_=>_);
 
-    const usernames = Object
-      .keys(allUsers)
-      .map(key => allUsers[key].nickname || `Guest: ${allUsers[key].id}`);
-
-    io.emit('connected users', usernames);
-  });
+  io.emit('connected users', usernames);
 };
 
-module.exports = sockets;
+// Passes socket nickname or id if no nickname set.
+// const emitUpdateUsersEvent = (io) => {
+  // // This '/' path is the path of the page with the websockets connection on
+  // io.of('/').clients((error, clients) => {
+    // if (error) throw error;
+
+    // const allUsers = io.sockets.sockets;
+
+    // const usernames = Object
+    //   .keys(allUsers)
+    //   .map(key => allUsers[key].nickname || `Guest: ${allUsers[key].id}`);
+
+    // io.emit('connected users', usernames);
+  // });
+// };
+
+// const getAllUsers = (io) => {
+//     const allUsers = io.sockets.sockets;
+
+//     const usernames = Object
+//       .keys(allUsers)
+//       .map(key => allUsers[key].nickname || `Guest: ${allUsers[key].id}`);
+
+//   return usernames;
+// };
+
+module.exports = { sockets };
