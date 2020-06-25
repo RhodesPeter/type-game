@@ -1,10 +1,10 @@
-const users = [];
+const { animalGame } = require('./games/animal-game');
+const cookie = require('cookie');
 
 const sockets = (io) => {
   io.on('connection', function (socket) {
     console.log('a user connected');
-    // emitUpdateUsersEvent(io); // Might be needed later but not now
-    // emitUsersWithUsernames(io); // ??
+
     emitUsersWithUsernames(io);
 
     socket.on('disconnect', function () {
@@ -19,6 +19,13 @@ const sockets = (io) => {
 
     socket.on('start game', function () {
       io.emit('direct to play route', getUsernames(io));
+    });
+
+    socket.on('submit word', function (data) {
+      if (data.game === 'animal') {
+        const username = cookie.parse(socket.handshake.headers.cookie || '').username;
+        animalGame(io, data.word, username);
+      }
     });
   });
 }
@@ -52,16 +59,6 @@ const getUsernames = (io) => {
 
     // io.emit('connected users', usernames);
   // });
-// };
-
-// const getAllUsers = (io) => {
-//     const allUsers = io.sockets.sockets;
-
-//     const usernames = Object
-//       .keys(allUsers)
-//       .map(key => allUsers[key].nickname || `Guest: ${allUsers[key].id}`);
-
-//   return usernames;
 // };
 
 module.exports = { sockets };

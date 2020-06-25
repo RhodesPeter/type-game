@@ -1,6 +1,57 @@
 (function () {
   'use strict';
 
+  const chat = () => {
+    const socket = io();
+
+    document.querySelector('.chat__form').addEventListener('submit', function (e) {
+      e.preventDefault(); // prevents page reloading
+      const textInput = document.querySelector('.chat__text-input');
+
+      if (textInput.value.length > 0) {
+        socket.emit('chat message', textInput.value);
+        textInput.value = '';
+        return false;
+      }
+    });
+
+    socket.on('chat message', function (msg) {
+      const liElement = document.createElement('li');
+      const messageContainer = document.querySelector('.chat__messages');
+
+      liElement.textContent = `${!!msg.username ? `${msg.username}: ` : ''}${msg.message}`;
+
+      messageContainer.append(liElement);
+      messageContainer.scrollTop = messageContainer.scrollHeight;
+    });
+
+    socket.on('connected users', function (users) {
+      const usersList = document.querySelector('.chat__users-list');
+
+      usersList.innerHTML = '';
+
+      users.forEach(user => {
+        const liElement = document.createElement('li');
+        liElement.classList.add('chat__user-list-item');
+        liElement.textContent = user;
+        usersList.append(liElement);
+      });
+    });
+
+    document.querySelector('.chat__username').addEventListener('submit', function (e) {
+      e.preventDefault(); // prevents page reloading
+
+      console.log('username submitted');
+
+      const usernameInput = document.querySelector('.chat__username-input');
+
+      if (usernameInput.value.length > 0) {
+        socket.emit('add username', usernameInput.value);
+        usernameInput.value = '';
+      }
+    });
+  };
+
   const addUsername = (socket) => {
     document
       .querySelector('.homepage__signin')
@@ -49,10 +100,59 @@
     });
   };
 
+  const animalGame = (socket) => {
+    document
+      .querySelector('.game-inputs--animals')
+      .addEventListener('submit', event => handleSubmitWord(event, socket));
+
+    socket.on('animals result', function (result, word, username) {
+      if (result === true) {
+        const animalsList = document.querySelector('.animal-game__list');
+        const liElement = document.createElement('li');
+        const userSpan = document.createElement('span');
+        liElement.classList.add('animal-game__list-item');
+        userSpan.classList.add('animal-game__list-item-span');
+        liElement.textContent = word;
+        userSpan.textContent = username;
+        liElement.append(userSpan);
+        animalsList.append(liElement);
+
+        addToScore(username);
+      } else {
+        console.log(false);
+        console.log(word);
+      }
+    });
+  };
+
+  const handleSubmitWord = (event, socket) => {
+    event.preventDefault();
+
+    const testInput = event.target.querySelector('.game-inputs__text-input');
+    const word = testInput.value.toLowerCase();
+
+    socket.emit('submit word', { game: 'animal', word: word });
+
+    testInput.value = '';
+  };
+
+  const addToScore = (username) => {
+    const scoreSpan = document.querySelector(`[data-user-score=${username}]`);
+    scoreSpan.textContent = Number(scoreSpan.textContent) + 1;
+  };
+
   const socket = io();
 
-  // if (document.querySelector('.chat')) chat();
+  if (document.querySelector('.chat')) {
+    chat();
+  }
+
   if (document.querySelector('.play')) ;
+
+  if (document.querySelector('.animal-game')) {
+    animalGame(socket);
+  }
+
   if (document.querySelector('.homepage__signin')) {
     displayAllUsers(socket);
     addUsername(socket);

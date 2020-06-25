@@ -15,6 +15,7 @@
     "ext": "js, html, json"
   },
   "dependencies": {
+    "cookie": "^0.4.1",
     "cookie-parser": "^1.4.5",
     "express": "^4.17.1",
     "socket.io": "^2.3.0"
