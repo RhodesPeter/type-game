@@ -3,7 +3,7 @@ const animalGame = (socket) => {
     .querySelector('.game-inputs--animals')
     .addEventListener('submit', event => handleSubmitWord(event, socket));
 
-  socket.on('animals result', function (result, word, username) {
+  socket.on('animals result', (result, word, username) => {
     if (result === true) {
       const animalsList = document.querySelector('.animal-game__list');
       const liElement = document.createElement('li');
@@ -18,11 +18,20 @@ const animalGame = (socket) => {
       liElement.append(userSpan);
       animalsList.append(liElement);
 
-      addToScore(username);
+      addToScore(socket, username);
     } else {
       console.log(false);
       console.log(word);
     }
+  });
+
+  socket.on('game over', (username) => {
+    const gameInputSection = document.querySelector('.game-inputs');
+    gameInputSection.innerHTML = '';
+    gameInputSection.insertAdjacentHTML('afterbegin', `<h1 class="game-inputs__winning-message">${username} wins!</h1>`)
+
+    highlightWinningAnswers(username);
+    // add restart game button?
   });
 };
 
@@ -44,9 +53,14 @@ const handleSubmitWord = (event, socket) => {
   testInput.value = '';
 };
 
-const addToScore = (username) => {
+const addToScore = (socket, username) => {
   const scoreSpan = document.querySelector(`[data-user-score=${username}]`);
-  scoreSpan.textContent = Number(scoreSpan.textContent) + 1;
+  const newScore = Number(scoreSpan.textContent) + 1;
+  scoreSpan.textContent = newScore;
+
+  if (newScore === 5) { // change to 10
+    socket.emit('user won', username);
+  }
 };
 
 const highlightExistingWord = (currentWordsElements, word) => {
@@ -63,6 +77,24 @@ const highlightExistingWord = (currentWordsElements, word) => {
       "transition: transform 0.2s linear, color 0.2s linear; transform: scale(1); color: black"
     );
   }, 200)
+};
+
+const highlightWinningAnswers = (username) => {
+  const winningCards = [...document
+    .querySelectorAll('.animal-game__list-item-span')]
+    .filter(card => card.textContent === username);
+
+  winningCards.forEach(card => {
+    card.parentElement.setAttribute(
+      "style",
+      "transition: transform 0.2s linear, color 0.2s linear; transform: scale(1.07);"
+    );
+
+    card.setAttribute(
+      "style",
+      "transition: color 0.2s linear; color: blue; border-color: blue"
+    );
+  });
 };
 
 export { animalGame };

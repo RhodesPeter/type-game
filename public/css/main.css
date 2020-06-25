@@ -283,7 +283,7 @@ body {
 }
 
 .animal-game__list-item {
-  margin: 16px 8px;
+  margin: 16px 12px;
   padding: 8px;
   position: relative;
   background-color: white;
@@ -320,4 +320,9 @@ body {
 
 .game-description__text {
   font-size: 18px;
+}
+
+.game-inputs__winning-message {
+  border-bottom: 2px solid tomato;
+  margin: 0 auto;
 }

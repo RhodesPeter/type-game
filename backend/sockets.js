@@ -27,6 +27,10 @@ const sockets = (io) => {
         animalGame(io, data.word, username);
       }
     });
+
+    socket.on('user won', function (username) {
+      io.emit('game over', username);
+    });
   });
 }
 
