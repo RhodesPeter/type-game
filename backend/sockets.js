@@ -31,6 +31,10 @@ const sockets = (io) => {
     socket.on('user won', function (username) {
       io.emit('game over', username);
     });
+
+    socket.on('restart game', function (username) {
+      io.emit('start new game', username);
+    });
   });
 }
 

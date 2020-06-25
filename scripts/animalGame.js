@@ -3,6 +3,8 @@ const animalGame = (socket) => {
     .querySelector('.game-inputs--animals')
     .addEventListener('submit', event => handleSubmitWord(event, socket));
 
+  document.querySelector('.restart-btn').addEventListener('click', () => restartGame(socket));
+
   socket.on('animals result', (result, word, username) => {
     if (result === true) {
       const animalsList = document.querySelector('.animal-game__list');
@@ -31,7 +33,12 @@ const animalGame = (socket) => {
     gameInputSection.insertAdjacentHTML('afterbegin', `<h1 class="game-inputs__winning-message">${username} wins!</h1>`)
 
     highlightWinningAnswers(username);
-    // add restart game button?
+
+    document.querySelector('.restart-btn').classList.remove('opacity-zero');
+  });
+
+  socket.on('start new game', () => {
+    location.reload();
   });
 };
 
@@ -95,6 +102,10 @@ const highlightWinningAnswers = (username) => {
       "transition: color 0.2s linear; color: blue; border-color: blue"
     );
   });
+};
+
+const restartGame = (socket) => {
+  socket.emit('restart game');
 };
 
 export { animalGame };

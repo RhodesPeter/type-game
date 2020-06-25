@@ -45,6 +45,8 @@ body {
 .homepage__signup-title {
   margin-bottom: 8px;
   font-size: 18px;
+  border-bottom: 2px solid tomato;
+  display: inline-block;
 }
 
 .homepage__text {
@@ -56,11 +58,15 @@ body {
   display: block;
   padding: 8px;
   width: 100%;
+  border: 2px;
+  border-radius: 2px;
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.1);
+  font-size: 16px;
 }
 
 .homepage__submit-btn,
 .btn {
-  padding: 8px;
+  padding: 8px 12px;
   background-color: white;
   border-radius: 2px;
   border-width: 1px;
@@ -72,23 +78,24 @@ body {
   display: inline-block;
   text-decoration: none;
   color: black;
+  cursor: pointer;
 }
 
 .btn--outline {
-  border: 2px solid turquoise;
+  border: 2px solid tomato;
 }
 
 .homepage__submit-btn:hover,
 .homepage__submit-btn:focus,
 .btn:hover,
 .btn:focus {
-  background-color: darkcyan;
+  background-color: mediumaquamarine;;
 }
 
 .homepage__submit-btn:active,
 .btn:active {
-  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2);
-  transform: translateY(3px);
+  box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.2);
+  transform: translateY(2px);
 }
 
 .section {
@@ -108,26 +115,31 @@ body {
   display: grid;
   grid-gap: 24px;
   grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: minmax(100px, auto) 1fr 1fr;
+  grid-template-rows: max-content;
   padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .play__players {
-  grid-row: 1;
-  grid-column: 5/6;
+  grid-row: 2/4;
+  grid-column: 1/2;
   text-align: center;
+  height: fit-content;
 }
 
-.play__player {
+.play__player,
+.players__list-item {
   font-size: 16px;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
   padding: 4px;
   background-color: white;
   border-radius: 2px;
   box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.1);
 }
 
-.play__player:last-of-type {
+.play__player:last-of-type,
+.players__list-item:last-of-type  {
   margin-bottom: 0;
 }
 
@@ -253,7 +265,7 @@ body {
 }
 
 .game-inputs {
-  grid-column: 2/5;
+  grid-column: 2/6;
   grid-row: 4;
   height: fit-content;
   display: flex;
@@ -264,10 +276,11 @@ body {
   width: 100%;
   padding: 8px;
   border: 0;
+  border-radius: 2px;
 }
 
 .animal-game {
-  grid-column: 2/5;
+  grid-column: 2/6;
   grid-row: 1/4;
 }
 
@@ -325,4 +338,13 @@ body {
 .game-inputs__winning-message {
   border-bottom: 2px solid tomato;
   margin: 0 auto;
+}
+
+.restart-btn {
+  margin-top: 16px;
+  transition: opacity 0.5s linear;
+}
+
+.opacity-zero {
+  opacity: 0;
 }

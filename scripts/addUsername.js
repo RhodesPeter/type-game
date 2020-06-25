@@ -9,6 +9,7 @@ const addUsername = (socket) => {
       if (usernameInput.value.length > 0) {
         socket.emit('add username', usernameInput.value);
         Cookies.set('username', usernameInput.value);
+        usernameInput.value = '';
       }
     });
 };

@@ -63,6 +63,7 @@
         if (usernameInput.value.length > 0) {
           socket.emit('add username', usernameInput.value);
           Cookies.set('username', usernameInput.value);
+          usernameInput.value = '';
         }
       });
   };
@@ -105,6 +106,8 @@
       .querySelector('.game-inputs--animals')
       .addEventListener('submit', event => handleSubmitWord(event, socket));
 
+    document.querySelector('.restart-btn').addEventListener('click', () => restartGame(socket));
+
     socket.on('animals result', (result, word, username) => {
       if (result === true) {
         const animalsList = document.querySelector('.animal-game__list');
@@ -133,7 +136,12 @@
       gameInputSection.insertAdjacentHTML('afterbegin', `<h1 class="game-inputs__winning-message">${username} wins!</h1>`);
 
       highlightWinningAnswers(username);
-      // add restart game button?
+
+      document.querySelector('.restart-btn').classList.remove('opacity-zero');
+    });
+
+    socket.on('start new game', () => {
+      location.reload();
     });
   };
 
@@ -197,6 +205,10 @@
         "transition: color 0.2s linear; color: blue; border-color: blue"
       );
     });
+  };
+
+  const restartGame = (socket) => {
+    socket.emit('restart game');
   };
 
   const socket = io();

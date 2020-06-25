@@ -4,14 +4,18 @@
 
 {% block content %}
   <div class="play">
-    <div class="play__players section">
-      <h1 class="section__title play__players__title">Score</h1>
-      <ul class="play__players-ul">
-        {% for player in players %}
-          <li class="play__player">{{ player }}: <span data-user-score="{{ player }}" class="play__player-score">0</span></li>
-        {% endfor  %}
-      </ul>
+    <div class="play__players">
+      <div class="section">
+        <h1 class="section__title play__players__title">Score</h1>
+        <ul class="play__players-ul">
+          {% for player in players %}
+            <li class="play__player">{{ player }}: <span data-user-score="{{ player }}" class="play__player-score">0</span></li>
+          {% endfor  %}
+        </ul>
+      </div>
+      <button class="restart-btn btn btn--outline opacity-zero" type="button">Restart game</button>
     </div>
+
     {% include "partials/animal-game.html" %} {# Change this depending on the game #}
 
     {{ gameInput(game='animals') }}
