@@ -125,8 +125,15 @@
 
         addToScore(socket, username);
       } else {
-        console.log(false);
-        console.log(word);
+        const input = document.querySelector('.game-inputs__text-input');
+        input.setAttribute(
+          "style",
+          "box-shadow: inset 0 0 32px tomato, 0 5px 10px 0 rgba(0, 0, 0, 0.2);"
+        );
+
+        setTimeout(() => {
+          input.setAttribute("style", "box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2);");
+        }, 300);
       }
     });
 
