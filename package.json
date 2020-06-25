@@ -4,10 +4,10 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "server-start": "node backend/server.js",
-    "server-watch": "nodemon backend/server.js",
-    "start": "rollup -c",
-    "watch": "rollup -c --watch"
+    "start": "node backend/server.js",
+    "watch": "nodemon backend/server.js",
+    "start-frontend": "rollup -c",
+    "watch-frontend": "rollup -c --watch"
   },
   "author": "",
   "license": "ISC",
@@ -18,11 +18,11 @@
     "cookie": "^0.4.1",
     "cookie-parser": "^1.4.5",
     "express": "^4.17.1",
-    "socket.io": "^2.3.0"
+    "socket.io": "^2.3.0",
+    "nunjucks": "^3.2.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.2",
-    "rollup": "^2.18.0",
-    "nunjucks": "^3.2.1"
+    "rollup": "^2.18.0"
   }
 }
