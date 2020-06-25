@@ -110,10 +110,13 @@
         const animalsList = document.querySelector('.animal-game__list');
         const liElement = document.createElement('li');
         const userSpan = document.createElement('span');
+        const animalWordSpan = document.createElement('span');
         liElement.classList.add('animal-game__list-item');
         userSpan.classList.add('animal-game__list-item-span');
-        liElement.textContent = word;
+        animalWordSpan.classList.add('animal-game__animal-word-span');
+        animalWordSpan.textContent = word;
         userSpan.textContent = username;
+        liElement.append(animalWordSpan);
         liElement.append(userSpan);
         animalsList.append(liElement);
 
@@ -131,7 +134,14 @@
     const testInput = event.target.querySelector('.game-inputs__text-input');
     const word = testInput.value.toLowerCase();
 
-    socket.emit('submit word', { game: 'animal', word: word });
+    const currentWordsElements = [...document.querySelectorAll('.animal-game__animal-word-span')];
+    const currentWords = currentWordsElements.map(el => el.textContent);
+
+    if (!currentWords.includes(word)) {
+      socket.emit('submit word', { game: 'animal', word: word });
+    } else {
+      highlightExistingWord(currentWordsElements, word);
+    }
 
     testInput.value = '';
   };
@@ -139,6 +149,22 @@
   const addToScore = (username) => {
     const scoreSpan = document.querySelector(`[data-user-score=${username}]`);
     scoreSpan.textContent = Number(scoreSpan.textContent) + 1;
+  };
+
+  const highlightExistingWord = (currentWordsElements, word) => {
+    const matchingWordElement = currentWordsElements.filter(currentWord => currentWord.textContent === word);
+    const parentCard = matchingWordElement[0].parentElement;
+    parentCard.setAttribute(
+      "style",
+      "transition: transform 0.2s linear; transform: scale(1.15); color: tomato"
+    );
+
+    setTimeout(() => {
+      parentCard.setAttribute(
+        "style",
+        "transition: transform 0.2s linear, color 0.2s linear; transform: scale(1); color: black"
+      );
+    }, 200);
   };
 
   const socket = io();

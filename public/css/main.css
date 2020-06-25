@@ -119,6 +119,10 @@ body {
 .play__player {
   font-size: 16px;
   margin-bottom: 16px;
+  padding: 4px;
+  background-color: white;
+  border-radius: 2px;
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.1);
 }
 
 .play__player:last-of-type {
@@ -129,6 +133,10 @@ body {
 .players__list-item,
 .animal-game__list-item {
   list-style: none;
+}
+
+.play__player-score {
+  color: tomato;
 }
 
 .homepage__start-game {
