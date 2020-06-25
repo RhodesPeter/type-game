@@ -24,7 +24,7 @@ const sockets = (io) => {
     socket.on('submit word', function (data) {
       if (data.game === 'animal') {
         const username = cookie.parse(socket.handshake.headers.cookie || '').username;
-        animalGame(io, data.word, username);
+        animalGame(io, data.word, username, socket);
       }
     });
 

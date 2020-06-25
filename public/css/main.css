@@ -126,6 +126,7 @@ body {
   grid-column: 1/2;
   text-align: center;
   height: fit-content;
+  white-space: nowrap;
 }
 
 .play__player,
@@ -316,6 +317,7 @@ body {
   border-radius: 2px;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1);
   z-index: 1;
+  white-space: nowrap;
 }
 
 .game-description {

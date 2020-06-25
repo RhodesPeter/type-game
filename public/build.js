@@ -61,8 +61,9 @@
         event.preventDefault();
 
         if (usernameInput.value.length > 0) {
-          socket.emit('add username', usernameInput.value);
-          Cookies.set('username', usernameInput.value);
+          const username = usernameInput.value.replace(' ', '-');
+          socket.emit('add username', username);
+          Cookies.set('username', username);
           usernameInput.value = '';
         }
       });
@@ -155,8 +156,8 @@
   const handleSubmitWord = (event, socket) => {
     event.preventDefault();
 
-    const testInput = event.target.querySelector('.game-inputs__text-input');
-    const word = testInput.value.toLowerCase();
+    const textInput = event.target.querySelector('.game-inputs__text-input');
+    const word = textInput.value.toLowerCase();
 
     const currentWordsElements = [...document.querySelectorAll('.animal-game__animal-word-span')];
     const currentWords = currentWordsElements.map(el => el.textContent);
@@ -167,7 +168,7 @@
       highlightExistingWord(currentWordsElements, word);
     }
 
-    testInput.value = '';
+    textInput.value = '';
   };
 
   const addToScore = (socket, username) => {
