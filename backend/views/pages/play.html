@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 {% from "partials/game-input.html" import gameInput %}
-
+{% from "partials/game-description.html" import gameDescription %}
 
 {% block content %}
   <div class="play">
     <div class="play__players section">
-      <h1 class="section__title">Score:</h1>
+      <h1 class="section__title play__players__title">Score</h1>
       <ul class="play__players-ul">
         {% for player in players %}
           <li class="play__player">{{ player }}: <span data-user-score="{{ player }}" class="play__player-score">0</span></li>
@@ -15,5 +15,6 @@
     {% include "partials/animal-game.html" %} {# Change this depending on the game #}
 
     {{ gameInput(game='animals') }}
+    {{ gameDescription(description='First person to name 10 unique animals wins!') }}
   </div>
 {% endblock %}
