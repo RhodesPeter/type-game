@@ -72,7 +72,7 @@ const addToScore = (socket, username) => {
   const newScore = Number(scoreSpan.textContent) + 1;
   scoreSpan.textContent = newScore;
 
-  if (newScore === 5) { // change to 10
+  if (newScore === 10) {
     socket.emit('user won', username);
   }
 };
