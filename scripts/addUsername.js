@@ -9,7 +9,7 @@ const addUsername = (socket) => {
       if (usernameInput.value.length > 0) {
         const username = usernameInput.value.replace(' ', '-');
         socket.emit('add username', username);
-        Cookies.set('username', username);
+        Cookies.set('username', username, { expires: 1 });
         usernameInput.value = '';
       }
     });
